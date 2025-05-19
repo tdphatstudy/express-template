@@ -9,26 +9,44 @@ This is a professional-grade boilerplate for building scalable REST APIs using:
 - **Supertest** – HTTP assertions
 
 ---
+Author: phat_tran
+---
 
 ## 📁 Project Structure
 
 
 project-root/
+
 ├── src/
+
 │ ├── config/ # Environment and database configs
+
 │ ├── controllers/ # Route handlers
+
 │ ├── models/ # Sequelize models
+
 │ ├── routes/ # Express routes
+
 │ ├── services/ # Business logic
+
 │ ├── middlewares/ # Custom Express middlewares
+
 │ ├── utils/ # Utility functions
+
 │ ├── app.ts # Main Express app setup
+
 │ └── server.ts # Entry point
+
 ├── tests/ # Jest test cases
+
 ├── .env # Environment variables
+
 ├── tsconfig.json # TypeScript config
+
 ├── jest.config.ts # Jest config
+
 ├── package.json
+
 └── README.md
 
 
