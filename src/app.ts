@@ -1,7 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import { sequelize } from './config/database';
-import { healthRoutes } from './routes/healthRoutes';
+import { sequelize } from '@/config/database';
+import { healthRoutes } from '@/routes/healthRoutes';
 
 dotenv.config();
 

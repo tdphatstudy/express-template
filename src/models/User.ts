@@ -1,12 +1,12 @@
 import { DataTypes, Model } from 'sequelize';
 import bcrypt from 'bcrypt';
-import { sequelize } from '../config/database';
+import { sequelize } from '@/config/database';
 import {
   IUserProps,
   IUserCreationProps,
   UserRole,
   UserStatus
-} from 'types';
+} from '@/types';
 
 const USER_STATUS_VALUES = ['active', 'inactive', 'banned', 'pending'] as const;
 const USER_ROLE_VALUES = ['admin', 'user', 'moderator'] as const;

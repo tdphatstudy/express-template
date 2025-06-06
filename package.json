@@ -33,8 +33,13 @@
     "typescript": "^5.8.3"
   },
   "scripts": {
+    "build": "tsc",
+    "clean": "rm -rf dist",
+    "dev": "tsx watch src/index.ts",
+    "start": "npm run build && npm run start:prod",
     "start:dev": "tsx watch src/index.ts",
-    "start:prod": "node dist/index.js",
+    "start:prod": "node -r tsconfig-paths/register dist/index.js",
+    "test": "jest",
     "db:create": "sequelize-cli db:create",
     "db:migrate": "sequelize-cli db:migrate",
     "db:seed": "sequelize-cli db:seed:all",

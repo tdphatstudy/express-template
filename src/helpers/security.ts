@@ -1,5 +1,5 @@
 import crypto from 'crypto';
-import { IHashPasswordResponseProps } from 'types';
+import { IHashPasswordResponseProps } from '@/types';
 
 export const generateRandomString = (length: number): string => {
   return crypto.randomBytes(length).toString('hex').slice(0, length);

@@ -1,6 +1,6 @@
-import { generateRandomString, hashPassword, hashString } from 'helpers';
+import { generateRandomString, hashPassword, hashString } from '@/helpers';
 import { get } from 'http';
-import { User } from 'models/User';
+import { User } from '@/models/User';
 
 export const createUser = async (data: { name: string; email: string }) => {
   const { name, email } = data;
