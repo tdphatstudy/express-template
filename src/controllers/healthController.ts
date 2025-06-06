@@ -1,41 +1,34 @@
 import { Request, Response } from 'express';
-import { sequelize } from '@/config/database';
+import { healthService } from '@/services/healthService';
 
 export const getHealth = async (req: Request, res: Response) => {
   try {
-    await sequelize.authenticate();
+    const healthData = await healthService.getHealthStatus();
     
-    const healthData = {
-      status: 'OK',
-      timestamp: new Date().toISOString(),
-      service: 'Express Template API',
-      version: '1.0.0',
-      database: {
-        status: 'Connected',
-        type: 'PostgreSQL'
-      },
-      uptime: process.uptime(),
-      memory: {
-        used: Math.round(process.memoryUsage().heapUsed / 1024 / 1024),
-        total: Math.round(process.memoryUsage().heapTotal / 1024 / 1024),
-        unit: 'MB'
-      }
-    };
-
-    res.status(200).json(healthData);
+    if (healthData.status === 'OK') {
+      res.status(200).json(healthData);
+    } else {
+      res.status(503).json(healthData);
+    }
   } catch (error) {
-    res.status(503).json({
+    res.status(500).json({
       status: 'ERROR',
       timestamp: new Date().toISOString(),
       service: 'Express Template API',
-      database: {
-        status: 'Disconnected',
-        error: error instanceof Error ? error.message : 'Unknown error'
-      }
+      error: error instanceof Error ? error.message : 'Internal server error'
     });
   }
 };
 
 export const getHealthSimple = (req: Request, res: Response) => {
-  res.status(200).json({ status: 'OK', message: 'Service is healthy' });
+  try {
+    const healthData = healthService.getSimpleHealthStatus();
+    res.status(200).json(healthData);
+  } catch (error) {
+    res.status(500).json({
+      status: 'ERROR',
+      message: 'Service unavailable',
+      error: error instanceof Error ? error.message : 'Internal server error'
+    });
+  }
 }; 
