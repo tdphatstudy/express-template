@@ -21,10 +21,10 @@ describe('HealthService', () => {
     it('should return healthy status when database connection is successful', async () => {
       // Arrange
       mockSequelize.authenticate.mockResolvedValue();
-      
+
       // Act
       const result = await healthService.getHealthStatus();
-      
+
       // Assert
       expect(result).toMatchObject({
         status: 'OK',
@@ -32,15 +32,15 @@ describe('HealthService', () => {
         version: '1.0.0',
         database: {
           status: 'Connected',
-          type: 'PostgreSQL'
-        }
+          type: 'PostgreSQL',
+        },
       });
       expect(result.timestamp).toBeDefined();
       expect(result.uptime).toBeDefined();
       expect(result.memory).toMatchObject({
         used: expect.any(Number),
         total: expect.any(Number),
-        unit: 'MB'
+        unit: 'MB',
       });
       expect(mockSequelize.authenticate).toHaveBeenCalledTimes(1);
     });
@@ -49,10 +49,10 @@ describe('HealthService', () => {
       // Arrange
       const dbError = new Error('Database connection failed');
       mockSequelize.authenticate.mockRejectedValue(dbError);
-      
+
       // Act
       const result = await healthService.getHealthStatus();
-      
+
       // Assert
       expect(result).toMatchObject({
         status: 'ERROR',
@@ -60,8 +60,8 @@ describe('HealthService', () => {
         version: '1.0.0',
         database: {
           status: 'Disconnected',
-          error: 'Database connection failed'
-        }
+          error: 'Database connection failed',
+        },
       });
       expect(result.timestamp).toBeDefined();
       expect(result.uptime).toBeUndefined();
@@ -72,10 +72,10 @@ describe('HealthService', () => {
     it('should handle unknown error types', async () => {
       // Arrange
       mockSequelize.authenticate.mockRejectedValue('Unknown error');
-      
+
       // Act
       const result = await healthService.getHealthStatus();
-      
+
       // Assert
       expect(result.database.error).toBe('Unknown error');
     });
@@ -84,11 +84,11 @@ describe('HealthService', () => {
       // Arrange
       mockSequelize.authenticate.mockResolvedValue();
       const beforeTest = new Date();
-      
+
       // Act
       const result = await healthService.getHealthStatus();
       const afterTest = new Date();
-      
+
       // Assert
       const resultTime = new Date(result.timestamp);
       expect(resultTime).toBeInstanceOf(Date);
@@ -101,11 +101,11 @@ describe('HealthService', () => {
     it('should return simple health status', () => {
       // Act
       const result = healthService.getSimpleHealthStatus();
-      
+
       // Assert
       expect(result).toEqual({
         status: 'OK',
-        message: 'Service is healthy'
+        message: 'Service is healthy',
       });
     });
 
@@ -113,9 +113,9 @@ describe('HealthService', () => {
       // Act
       const result1 = healthService.getSimpleHealthStatus();
       const result2 = healthService.getSimpleHealthStatus();
-      
+
       // Assert
       expect(result1).toEqual(result2);
     });
   });
-}); 
+});

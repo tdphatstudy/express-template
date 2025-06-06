@@ -25,7 +25,7 @@ export class HealthService {
   async getHealthStatus(): Promise<HealthData> {
     try {
       await sequelize.authenticate();
-      
+
       return {
         status: 'OK',
         timestamp: new Date().toISOString(),
@@ -33,14 +33,14 @@ export class HealthService {
         version: this.version,
         database: {
           status: 'Connected',
-          type: 'PostgreSQL'
+          type: 'PostgreSQL',
         },
         uptime: process.uptime(),
         memory: {
           used: Math.round(process.memoryUsage().heapUsed / 1024 / 1024),
           total: Math.round(process.memoryUsage().heapTotal / 1024 / 1024),
-          unit: 'MB'
-        }
+          unit: 'MB',
+        },
       };
     } catch (error) {
       return {
@@ -50,18 +50,18 @@ export class HealthService {
         version: this.version,
         database: {
           status: 'Disconnected',
-          error: error instanceof Error ? error.message : 'Unknown error'
-        }
+          error: error instanceof Error ? error.message : 'Unknown error',
+        },
       };
     }
   }
 
   getSimpleHealthStatus(): { status: string; message: string } {
-    return { 
-      status: 'OK', 
-      message: 'Service is healthy' 
+    return {
+      status: 'OK',
+      message: 'Service is healthy',
     };
   }
 }
 
-export const healthService = new HealthService(); 
+export const healthService = new HealthService();

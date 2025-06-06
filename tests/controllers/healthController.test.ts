@@ -20,13 +20,13 @@ describe('HealthController', () => {
   beforeEach(() => {
     statusSpy = jest.fn().mockReturnThis();
     jsonSpy = jest.fn().mockReturnThis();
-    
+
     req = {};
     res = {
       status: statusSpy,
       json: jsonSpy,
     };
-    
+
     jest.clearAllMocks();
   });
 
@@ -40,14 +40,14 @@ describe('HealthController', () => {
         version: '1.0.0',
         database: {
           status: 'Connected',
-          type: 'PostgreSQL'
+          type: 'PostgreSQL',
         },
         uptime: 100,
         memory: {
           used: 50,
           total: 100,
-          unit: 'MB'
-        }
+          unit: 'MB',
+        },
       };
       mockHealthService.getHealthStatus.mockResolvedValue(healthData);
 
@@ -69,8 +69,8 @@ describe('HealthController', () => {
         version: '1.0.0',
         database: {
           status: 'Disconnected',
-          error: 'Database connection failed'
-        }
+          error: 'Database connection failed',
+        },
       };
       mockHealthService.getHealthStatus.mockResolvedValue(healthData);
 
@@ -98,7 +98,7 @@ describe('HealthController', () => {
         status: 'ERROR',
         timestamp: expect.any(String),
         service: 'Express Template API',
-        error: 'Service unavailable'
+        error: 'Service unavailable',
       });
     });
 
@@ -115,7 +115,7 @@ describe('HealthController', () => {
         status: 'ERROR',
         timestamp: expect.any(String),
         service: 'Express Template API',
-        error: 'Internal server error'
+        error: 'Internal server error',
       });
     });
   });
@@ -125,7 +125,7 @@ describe('HealthController', () => {
       // Arrange
       const simpleHealthData = {
         status: 'OK',
-        message: 'Service is healthy'
+        message: 'Service is healthy',
       };
       mockHealthService.getSimpleHealthStatus.mockReturnValue(simpleHealthData);
 
@@ -153,7 +153,7 @@ describe('HealthController', () => {
       expect(jsonSpy).toHaveBeenCalledWith({
         status: 'ERROR',
         message: 'Service unavailable',
-        error: 'Service error'
+        error: 'Service error',
       });
     });
 
@@ -171,8 +171,8 @@ describe('HealthController', () => {
       expect(jsonSpy).toHaveBeenCalledWith({
         status: 'ERROR',
         message: 'Service unavailable',
-        error: 'Internal server error'
+        error: 'Internal server error',
       });
     });
   });
-}); 
+});

@@ -1,18 +1,13 @@
 import { DataTypes, Model } from 'sequelize';
 import bcrypt from 'bcrypt';
 import { sequelize } from '@/config/database';
-import {
-  IUserProps,
-  IUserCreationProps,
-  UserRole,
-  UserStatus
-} from '@/types';
+import { IUserProps, IUserCreationProps, UserRole, UserStatus } from '@/types';
 
 const USER_STATUS_VALUES = ['active', 'inactive', 'banned', 'pending'] as const;
 const USER_ROLE_VALUES = ['admin', 'user', 'moderator'] as const;
 
-type UserStatusValue = typeof USER_STATUS_VALUES[number];
-type UserRoleValue = typeof USER_ROLE_VALUES[number];
+type UserStatusValue = (typeof USER_STATUS_VALUES)[number];
+type UserRoleValue = (typeof USER_ROLE_VALUES)[number];
 
 export class User
   extends Model<IUserProps, IUserCreationProps>

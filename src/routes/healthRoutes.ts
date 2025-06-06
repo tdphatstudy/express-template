@@ -7,4 +7,4 @@ router.get('/', getHealth);
 
 router.get('/simple', getHealthSimple);
 
-export { router as healthRoutes }; 
+export { router as healthRoutes };

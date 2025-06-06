@@ -22,9 +22,7 @@ describe('Health Routes Integration Tests', () => {
       mockSequelize.authenticate.mockResolvedValue();
 
       // Act
-      const response = await request(app)
-        .get('/api/health')
-        .expect(200);
+      const response = await request(app).get('/api/health').expect(200);
 
       // Assert
       expect(response.body).toMatchObject({
@@ -33,15 +31,15 @@ describe('Health Routes Integration Tests', () => {
         version: '1.0.0',
         database: {
           status: 'Connected',
-          type: 'PostgreSQL'
-        }
+          type: 'PostgreSQL',
+        },
       });
       expect(response.body.timestamp).toBeDefined();
       expect(response.body.uptime).toBeDefined();
       expect(response.body.memory).toMatchObject({
         used: expect.any(Number),
         total: expect.any(Number),
-        unit: 'MB'
+        unit: 'MB',
       });
     });
 
@@ -51,9 +49,7 @@ describe('Health Routes Integration Tests', () => {
       mockSequelize.authenticate.mockRejectedValue(dbError);
 
       // Act
-      const response = await request(app)
-        .get('/api/health')
-        .expect(503);
+      const response = await request(app).get('/api/health').expect(503);
 
       // Assert
       expect(response.body).toMatchObject({
@@ -62,8 +58,8 @@ describe('Health Routes Integration Tests', () => {
         version: '1.0.0',
         database: {
           status: 'Disconnected',
-          error: 'Connection refused'
-        }
+          error: 'Connection refused',
+        },
       });
       expect(response.body.timestamp).toBeDefined();
     });
@@ -83,14 +79,12 @@ describe('Health Routes Integration Tests', () => {
   describe('GET /api/health/simple', () => {
     it('should return simple health status with 200', async () => {
       // Act
-      const response = await request(app)
-        .get('/api/health/simple')
-        .expect(200);
+      const response = await request(app).get('/api/health/simple').expect(200);
 
       // Assert
       expect(response.body).toEqual({
         status: 'OK',
-        message: 'Service is healthy'
+        message: 'Service is healthy',
       });
     });
 
@@ -107,18 +101,14 @@ describe('Health Routes Integration Tests', () => {
       mockSequelize.authenticate.mockRejectedValue(new Error('DB Error'));
 
       // Act & Assert
-      await request(app)
-        .get('/api/health/simple')
-        .expect(200);
+      await request(app).get('/api/health/simple').expect(200);
     });
   });
 
   describe('Error handling', () => {
     it('should return 404 for non-existent health endpoints', async () => {
       // Act & Assert
-      await request(app)
-        .get('/api/health/nonexistent')
-        .expect(404);
+      await request(app).get('/api/health/nonexistent').expect(404);
     });
   });
-}); 
+});

@@ -13,7 +13,7 @@ export interface IUserProps {
   status: UserStatus;
   confirmed_at?: Date;
   was_confirmed: boolean;
-  email_unconfirmed: string
+  email_unconfirmed: string;
   confirmation_token?: string;
 }
 

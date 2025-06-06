@@ -6,15 +6,15 @@ const config = {
     password: process.env.DB_PASSWORD || null,
     database: process.env.DB_NAME || 'template_development',
     host: process.env.DB_HOST || 'localhost',
-    dialect: 'postgres'
+    dialect: 'postgres',
   },
   production: {
     username: process.env.DB_USER || 'prod_user',
     password: process.env.DB_PASSWORD || 'secret',
     database: process.env.DB_NAME || 'prod_db',
     host: process.env.DB_HOST || 'prod-db-host',
-    dialect: 'postgres'
-  }
+    dialect: 'postgres',
+  },
 };
 
-module.exports = config; 
+module.exports = config;
