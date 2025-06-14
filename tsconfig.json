@@ -10,8 +10,20 @@
     "outDir": "./dist",
     "baseUrl": "./src",
     "paths": {
-      "*": ["*"]
+      "@/*": ["*"],
+      "@/config/*": ["config/*"],
+      "@/controllers/*": ["controllers/*"],
+      "@/routes/*": ["routes/*"],
+      "@/models/*": ["models/*"],
+      "@/services/*": ["services/*"],
+      "@/types/*": ["types/*"],
+      "@/helpers/*": ["helpers/*"],
+      "@/constant/*": ["constant/*"],
+      "@/migrations/*": ["migrations/*"]
     }
   },
-  "include": ["src/**/*.ts"]
+  "include": ["src/**/*.ts", "src/**/*.js"],
+  "ts-node": {
+    "require": ["tsconfig-paths/register"]
+  }
 }

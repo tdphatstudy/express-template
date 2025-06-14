@@ -1,10 +1,9 @@
-import { generateRandomString, hashPassword, hashString } from 'helpers';
-import { get } from 'http';
-import { User } from 'models/User';
+import { generateRandomString, hashPassword } from '@/helpers';
+import { User } from '@/models/User';
 
 export const createUser = async (data: { name: string; email: string }) => {
   const { name, email } = data;
-  const  password = hashPassword(generateRandomString(16))
+  const password = hashPassword(generateRandomString(16));
   return await User.create({
     name,
     email,
@@ -14,7 +13,7 @@ export const createUser = async (data: { name: string; email: string }) => {
     was_confirmed: false,
     email_unconfirmed: email,
     password: password.hashedPassword,
-    confirmation_token: generateRandomString(32)
+    confirmation_token: generateRandomString(32),
   });
 };
 
